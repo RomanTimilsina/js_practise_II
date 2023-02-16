@@ -17,15 +17,16 @@ function initial(){
 }
 
 function previous(){
-  i = i -2;
-  slider.style.transform = `translateX(-${i*400}px)` ;
-  i-- ;
+  
+  slider.style.transform = `translateX(-${(i - 2)*400}px)` ;
+  i = i - 1;
+  
 }
 
 function last(){
-let x = sliderLength -1
+const x = sliderLength -1
   slider.style.transform = `translateX(-${x* 400}px)` ;
-  i-- ;
+  i = sliderLength;
 }
 
 
@@ -36,5 +37,18 @@ right.addEventListener('click', () => {
 
 left.addEventListener('click', () => {
   i === 1 ? last() : previous() 
+  
+})
+
+const bottom = document.querySelector('.bottom');
+image.forEach((element, index) => {
+  const button = document.createElement('div');
+  button.classList.add('button');
+
+  button.addEventListener('click', () => {
+    slider.style.transform = `translateX(-${index*400}px)` ;
+  })
+
+  bottom.appendChild(button);
   
 })
