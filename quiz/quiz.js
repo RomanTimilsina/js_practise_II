@@ -34,8 +34,17 @@ const question = document.querySelector('.question');
 const answers = document.querySelector('.answers');
 const content = document.querySelector('.content');
 const result = document.querySelector('.result');
+const play = document.querySelector('.play');
 let i = 0 ;
 let selectAnswer = null
+
+const playAgain = () => {
+i = 0;
+setQandA(0);
+content.classList.remove('hide')
+result.classList.add('hide')
+
+}
 
 const selectedAnswer = () => {
   document.querySelectorAll('input').forEach(el => {
@@ -66,21 +75,26 @@ setQandA(0);
 
 const submit = document.querySelector('.submit');
 submit.addEventListener('click', () => {
-  console.log(i)
 
-  console.log(data.length)
   if(i >= data.length - 1){
     content.classList.add('hide')
     result.classList.remove('hide')
     selectAnswer = null
   }
+
   if(selectAnswer ){
   i++;
   setQandA(i);
   selectAnswer = null;
 }
-
 })
+
+play.addEventListener('click', () => {
+  playAgain()
+})
+
+
+
 
 
 
