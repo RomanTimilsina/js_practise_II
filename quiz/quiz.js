@@ -32,28 +32,55 @@ const data = [
 
 const question = document.querySelector('.question');
 const answers = document.querySelector('.answers');
+const content = document.querySelector('.content');
+const result = document.querySelector('.result');
 let i = 0 ;
+let selectAnswer = null
+
+const selectedAnswer = () => {
+  document.querySelectorAll('input').forEach(el => {
+    
+    el.addEventListener('click', (e) => {
+      selectAnswer = e.target.value;
+      console.log(e.target.value)
+    })
+  })
+}
 
 const setQandA = (i) => {
   question.innerHTML = data[i].question;
   console.log(data[i].answers)
 
-  answers.innerHTML = data[i].answers.map(element => 
+  answers.innerHTML = data[i].answers.map((element,index) => 
     
   `<div class="answer">
-    <input type="radio" name="answer" class="radio" value=${element.isCorrect} />
-    <label for="1">${element.answer}</label>
+    <input type="radio" id=${index} name="answer" class="radio" value=${element.isCorrect} />
+    <label for="${index}">${element.answer}</label>
   </div>
   `
   ).join('')
+  selectedAnswer()
 }
 
-setQandA(0)
+setQandA(0);
+
 const submit = document.querySelector('.submit');
 submit.addEventListener('click', () => {
-  
+  console.log(i)
+
+  console.log(data.length)
+  if(i >= data.length - 1){
+    content.classList.add('hide')
+    result.classList.remove('hide')
+    selectAnswer = null
+  }
+  if(selectAnswer ){
   i++;
   setQandA(i);
+  selectAnswer = null;
+}
+
 })
+
 
 
