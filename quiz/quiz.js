@@ -36,6 +36,7 @@ const content = document.querySelector('.content');
 const result = document.querySelector('.result');
 const play = document.querySelector('.play');
 let i = 0 ;
+let correctAns = 0, wrongAns = 0;
 let selectAnswer = null
 
 const playAgain = () => {
@@ -43,7 +44,6 @@ i = 0;
 setQandA(0);
 content.classList.remove('hide')
 result.classList.add('hide')
-
 }
 
 const selectedAnswer = () => {
@@ -51,14 +51,17 @@ const selectedAnswer = () => {
     
     el.addEventListener('click', (e) => {
       selectAnswer = e.target.value;
+      e.target.value === 'true' ? correctAns++ : wrongAns++;
       console.log(e.target.value)
+      console.log("c:"+correctAns)
+      console.log("w:"+wrongAns)
     })
   })
 }
 
 const setQandA = (i) => {
   question.innerHTML = data[i].question;
-  console.log(data[i].answers)
+  
 
   answers.innerHTML = data[i].answers.map((element,index) => 
     
@@ -71,12 +74,19 @@ const setQandA = (i) => {
   selectedAnswer()
 }
 
+const finalResult = () => {
+  document.querySelector('.correct_ans').innerHTML = correctAns;
+  document.querySelector('.wrong_ans').innerHTML = wrongAns;
+  document.querySelector('.score').innerHTML = correctAns * 5 - wrongAns * 2.5;
+}
+
 setQandA(0);
 
 const submit = document.querySelector('.submit');
 submit.addEventListener('click', () => {
 
   if(i >= data.length - 1){
+    finalResult()
     content.classList.add('hide')
     result.classList.remove('hide')
     selectAnswer = null
