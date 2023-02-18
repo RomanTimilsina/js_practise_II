@@ -10,7 +10,7 @@ const data = [
     id: 11,
     name: "Invicta Men's Pro Diver 2",
     img: "https://m.media-amazon.com/images/I/71e04Q53xlL._AC_UY879_.jpg",
-    price: 74,
+    price: 24,
     cat: "Dress",
   },
   {
@@ -38,14 +38,15 @@ const data = [
     id: 5,
     name: "Garmin Venu Smartwatch ",
     img: "https://m.media-amazon.com/images/I/51kyjYuOZhL._AC_SL1000_.jpg",
-    price: 74,
+    price: 34,
     cat: "Casual",
   },
 ];
 
 const Search = document.querySelector('.search');
 const ProductContainer = document.querySelector('.products');
-const CategoriesContainer = document.querySelector('.cats')
+const CategoriesContainer = document.querySelector('.cats');
+const Price = document.querySelector('.priceRange');
 
 const AddProducts = (display) => {
   
@@ -77,7 +78,7 @@ AddProducts(data)
   const category = [];
   data.forEach(d => category.includes(d.cat) ? null : category.push(d.cat))
   category.unshift('All')
-  console.log(category)
+  
  
   CategoriesContainer.innerHTML = category.map(cat => 
    ` <div class='cat'>${cat}</div>`
@@ -92,3 +93,12 @@ AddProducts(data)
   }
 
   setCat()
+const pricelist = data.map(p =>  p.price)
+
+  Price.min = Math.min(...pricelist)
+  Price.max = Math.max(...pricelist)
+  Price.value = Math.max(...pricelist)
+Price.addEventListener('input', (e) => {
+  const PriceFilter = data.filter(d => d.price <= e.target.value)
+  AddProducts(PriceFilter)
+})
