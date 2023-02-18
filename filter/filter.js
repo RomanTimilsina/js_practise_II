@@ -45,6 +45,7 @@ const data = [
 
 const Search = document.querySelector('.search');
 const ProductContainer = document.querySelector('.products');
+const CategoriesContainer = document.querySelector('.cats')
 
 const AddProducts = (display) => {
   
@@ -56,7 +57,7 @@ const AddProducts = (display) => {
     <p class="product_price">$${p.price}</p>
   </div>
   `
-  )
+  ).join('')
 }
 
 AddProducts(data)
@@ -70,3 +71,24 @@ AddProducts(data)
 
       AddProducts(searchedData)
   })
+
+  function setCat()
+  {
+  const category = [];
+  data.forEach(d => category.includes(d.cat) ? null : category.push(d.cat))
+  category.unshift('All')
+  console.log(category)
+ 
+  CategoriesContainer.innerHTML = category.map(cat => 
+   ` <div class='cat'>${cat}</div>`
+  ).join('')
+
+  CategoriesContainer.addEventListener('click', (e) => {
+   AddProducts(data.filter(d => { return d.cat.indexOf(e.target.innerText) !== -1 }))
+   if(e.target.innerText === 'All'){ AddProducts(data) }
+   console.log(e.target.innerText)
+  })
+
+  }
+
+  setCat()
