@@ -1,0 +1,56 @@
+
+.container{
+  display: flex;
+  padding: 10px;
+  font-family: serif;
+  
+}
+
+.leftMenu{
+  flex: 1;
+  background-color: #ece7e7;
+  height: 100vw;
+  padding: 10px;
+}
+
+h1{
+  font-weight: normal;
+  color: rgb(122, 45, 45);
+}
+
+.cats{
+  color: rgb(23, 76, 123);
+}
+
+.cat{
+  padding: 10px;
+}
+
+.content{
+  flex: 4;
+}
+
+.products{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+
+
+.product{
+  margin: 0;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+img{
+  height: 250px;
+}
+
+.product_price{
+  
+}
